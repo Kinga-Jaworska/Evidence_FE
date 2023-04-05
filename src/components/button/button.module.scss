@@ -1,0 +1,10 @@
+@use "styles/variables.scss";
+@use "styles/mixins.scss";
+
+.button {
+  @include mixins.baseButton;
+  background-color: variables.$color-secondary;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+}
