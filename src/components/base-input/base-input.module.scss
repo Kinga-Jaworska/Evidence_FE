@@ -1,0 +1,45 @@
+@use "styles/variables.scss";
+
+.fieldset {
+  font-weight: 600;
+  border-radius: 6px;
+  border-color: variables.$color-white;
+  color: variables.$color-secondary;
+}
+
+.input {
+  color: variables.$color-white;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+}
+
+.input:focus {
+  outline: none;
+}
+.input::placeholder {
+  color: variables.$color-white;
+}
+
+.input:focus::placeholder {
+  animation: 1s shrink;
+  color: transparent;
+}
+
+@keyframes shrink {
+  0% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.legend {
+  animation: 1s shrink;
+}
+
+.noLegend {
+  height: 10px;
+}
