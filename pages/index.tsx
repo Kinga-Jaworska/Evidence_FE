@@ -4,7 +4,6 @@ import { AddForm } from "../src/components/forms";
 const Home: NextPage = () => {
   return (
     <div>
-      <p>Hello</p>
       <AddForm />
     </div>
   );

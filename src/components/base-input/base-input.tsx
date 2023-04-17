@@ -2,8 +2,13 @@ import { FC, useState } from "react";
 import styles from "./base-input.module.scss";
 import { BaseInputProps } from "./base-input.types";
 
-export const BaseInput: FC<BaseInputProps> = ({ value, label, ...props }) => {
-  const [isShrink, setIsShrink] = useState(false);
+export const BaseInput: FC<BaseInputProps> = ({
+  shrinkState = false,
+  value,
+  label,
+  ...props
+}) => {
+  const [isShrink, setIsShrink] = useState(shrinkState);
   return (
     <fieldset className={styles.fieldset}>
       {isShrink && <legend className={styles.legend}>{label}</legend>}

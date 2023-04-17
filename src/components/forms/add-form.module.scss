@@ -3,7 +3,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: fit-content;
   border-radius: 5px;
   padding: 20px;
   align-items: center;
@@ -12,6 +11,8 @@
 .form {
   display: flex;
   flex-direction: column;
+  align-self: center;
+  justify-self: center;
   border-radius: 6px;
   gap: 30px;
   min-width: 270px;

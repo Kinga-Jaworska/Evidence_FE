@@ -8,7 +8,12 @@ export const AddForm: FC = () => {
   return (
     <div className={styles.container}>
       <Formik
-        initialValues={{ title: "", description: "", start_time: "" }}
+        initialValues={{
+          title: "",
+          description: "",
+          start_time: "",
+          end_time: "",
+        }}
         //  valnameate={values => {
         //    const errors = {};
         //    if (!values.email) {
@@ -46,6 +51,14 @@ export const AddForm: FC = () => {
               name="start_time"
               type="datetime-local"
               value={values.start_time}
+              label="Start Time"
+              onChange={handleChange}
+            />
+            <BaseInput
+              shrinkState
+              name="end_time"
+              type="datetime-local"
+              value={values.end_time}
               label="Start Time"
               onChange={handleChange}
             />
