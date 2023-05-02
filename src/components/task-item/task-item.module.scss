@@ -1,0 +1,20 @@
+@use "styles/variables.scss";
+
+.container {
+  display: flex;
+  padding: 0 20px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.title {
+  padding: 0;
+}
+
+.duration {
+  border-radius: 10px;
+  padding: 10px;
+  background-color: variables.$color-white;
+  box-shadow: variables.$card-box-shadow;
+}
