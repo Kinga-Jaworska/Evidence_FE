@@ -2,6 +2,6 @@ import React from "react";
 
 export interface BaseInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  shrinkState?: boolean;
+  error?: string;
   label: string;
 }

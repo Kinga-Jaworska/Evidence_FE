@@ -1,14 +1,16 @@
 @use "styles/variables.scss";
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
 
 .fieldset {
   font-weight: 600;
   border-radius: 6px;
-  border-color: variables.$color-white;
+  border-width: 1px;
+  border-color: variables.$color-accent;
   color: variables.$color-secondary;
 }
 
 .input {
-  color: variables.$color-white;
+  color: variables.$color-accent;
   width: 100%;
   background-color: transparent;
   border: none;
@@ -22,24 +24,26 @@
 }
 
 .input:focus::placeholder {
-  animation: 1s shrink;
   color: transparent;
 }
 
-@keyframes shrink {
+@keyframes grow {
   0% {
-    transform: translateY(-10px);
+    transform: scale(0);
   }
 
   100% {
-    transform: translateY(0px);
+    transform: scale(1);
   }
 }
 
 .legend {
-  animation: 1s shrink;
+  -webkit-animation: 1s grow;
+  animation: 1s grow;
 }
 
-.noLegend {
-  height: 10px;
+.error {
+  padding: 0 16px;
+  font-size: smaller;
+  color: red;
 }

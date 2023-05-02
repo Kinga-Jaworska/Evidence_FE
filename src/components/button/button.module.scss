@@ -3,7 +3,7 @@
 
 .button {
   @include mixins.baseButton;
-  background-color: variables.$color-secondary;
+  background-color: variables.$color-accent;
   padding: 10px;
   border-radius: 5px;
   color: variables.$color-white;

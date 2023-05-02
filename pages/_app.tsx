@@ -1,15 +1,21 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { AppProps } from "next/app";
-import "../styles/globals.css";
+import { Provider } from "react-redux";
+import "../styles/globals.scss";
+
+import { wrapper } from "./../store/store";
 
 const queryClient = new QueryClient();
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, ...rest }: AppProps) {
+  const { store } = wrapper.useWrappedStore(rest);
   return (
-    <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
+    </Provider>
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

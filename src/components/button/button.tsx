@@ -1,10 +1,11 @@
+import clsx from "clsx";
 import { FC } from "react";
-import { ButtonProps } from "./button.types";
 import styles from "./button.module.scss";
+import { ButtonProps } from "./button.types";
 
-export const Button: FC<ButtonProps> = ({ children, ...props }) => {
+export const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
   return (
-    <button className={styles.button} {...props}>
+    <button className={clsx(styles.button, className)} {...props}>
       {children}
     </button>
   );
