@@ -9,6 +9,7 @@ export type ModalProps = {
 };
 
 export const CustomModal = ({ open, children, closeModal }: ModalProps) => {
+  Modal.setAppElement("#__next");
   return (
     <Modal
       isOpen={open}
