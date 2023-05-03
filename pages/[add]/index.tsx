@@ -1,7 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import type { NextPage } from "next";
 import toast from "react-simple-toasts";
-import { Task, TaskForm } from "../../src/components/forms/task-form";
+import { TaskForm } from "../../src/components/forms/task-form";
+import { Task } from "../../src/services";
 
 const AddPage: NextPage = () => {
   const addMutation = useMutation({

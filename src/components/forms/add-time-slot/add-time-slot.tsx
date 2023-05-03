@@ -2,27 +2,22 @@ import { useFormik } from "formik";
 import { FC, ReactNode } from "react";
 
 import moment from "moment";
+import { AddTimeSlot } from "../../../services";
 import { BaseInput } from "../../base-input";
 import { Button } from "../../button/button";
 import styles from "./add-time-slot.module.scss";
-
-export type AddTimeTask = {
-  start_time: string;
-  end_time: string;
-  duration: number;
-};
 
 export type TaskError = {
   start_time?: string;
 };
 
-interface EditTimeFormProps {
-  handleSubmit: (data: AddTimeTask) => void;
-  initialValues: AddTimeTask;
+interface AddTimeSlotProps {
+  handleSubmit: (data: AddTimeSlot) => void;
+  initialValues: AddTimeSlot;
   closeIcon?: ReactNode;
 }
 
-export const AddTimeSlot: FC<EditTimeFormProps> = ({
+export const AddTimeSlotForm: FC<AddTimeSlotProps> = ({
   closeIcon,
   initialValues,
   handleSubmit,

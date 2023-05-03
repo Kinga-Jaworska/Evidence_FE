@@ -2,17 +2,10 @@ import { useFormik } from "formik";
 import moment from "moment";
 import { FC, ReactNode } from "react";
 
+import { Task } from "../../../services";
 import { BaseInput } from "../../base-input";
 import { Button } from "../../button/button";
 import styles from "./task-form.module.scss";
-
-export type Task = {
-  title: string;
-  description?: string;
-  start_time: string;
-  end_time: string;
-  duration: number;
-};
 
 export type TaskError = {
   title?: string;

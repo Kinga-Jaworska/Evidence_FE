@@ -1,6 +1,11 @@
 import { FC } from "react";
 import styles from "./base-input.module.scss";
-import { BaseInputProps } from "./base-input.types";
+
+export interface BaseInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  error?: string;
+  label: string;
+}
 
 export const BaseInput: FC<BaseInputProps> = ({
   value,

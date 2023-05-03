@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Close from "assets/close-circle.svg";
 import Image from "next/image";
+import { ReadTask, Task } from "../../services";
 import { Button } from "../button/button";
-import { Task, TaskForm } from "../forms/task-form";
-import { ReadTask } from "../home-page-content/home-page-content";
+import { TaskForm } from "../forms/task-form";
 import { CustomModal } from "../modal/modal";
 import styles from "./edit.module.scss";
 

@@ -1,10 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Close from "assets/close-circle.svg";
 import Image from "next/image";
+import { AddTimeSlot, ReadTask, TimeSlot } from "../../services";
 import { Button } from "../button/button";
-import { AddTimeSlot, AddTimeTask } from "../forms/add-time-slot";
-import { Task } from "../forms/task-form";
-import { ReadTask } from "../home-page-content/home-page-content";
+import { AddTimeSlotForm } from "../forms/add-time-slot";
 import { CustomModal } from "../modal/modal";
 import styles from "./add-slot.module.scss";
 
@@ -13,10 +12,6 @@ export type AddSlotProps = {
   open: boolean;
   onClose: () => void;
 };
-
-export interface TimeSlot extends AddTimeTask {
-  task: Task;
-}
 
 export const AddSlot = ({ task, open, onClose }: AddSlotProps) => {
   const queryClient = useQueryClient();
@@ -28,7 +23,7 @@ export const AddSlot = ({ task, open, onClose }: AddSlotProps) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...data, task_id: 2 }),
+        body: JSON.stringify({ ...data, task_id: task.id }),
       });
     },
     onError: (error: any) => {
@@ -40,13 +35,13 @@ export const AddSlot = ({ task, open, onClose }: AddSlotProps) => {
     },
   });
 
-  const handleEdit = (slot: AddTimeTask) => {
+  const handleEdit = (slot: AddTimeSlot) => {
     addTimeSlotMutation.mutate({ ...slot, task });
   };
 
   return (
     <CustomModal open={open} closeModal={onClose}>
-      <AddTimeSlot
+      <AddTimeSlotForm
         handleSubmit={handleEdit}
         initialValues={task}
         closeIcon={
