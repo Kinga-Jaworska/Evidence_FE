@@ -1,0 +1,6 @@
+@use "styles/mixins.scss";
+
+.closeButton {
+  @include mixins.transparentButton;
+  width: fit-content;
+}

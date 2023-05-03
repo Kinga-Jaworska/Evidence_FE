@@ -1,0 +1,14 @@
+@use "styles/variables.scss";
+
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.downloadSection {
+  display: flex;
+  align-self: center;
+  width: fit-content;
+}

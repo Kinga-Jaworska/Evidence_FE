@@ -1,0 +1,15 @@
+@use "styles/variables.scss";
+@use "styles/mixins.scss";
+
+.button {
+  @include mixins.baseButton;
+  background-color: variables.$color-accent;
+  padding: 10px;
+  border-radius: 5px;
+  color: variables.$color-white;
+}
+
+.button:hover {
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}
