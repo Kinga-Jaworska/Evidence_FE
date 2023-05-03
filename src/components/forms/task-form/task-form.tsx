@@ -1,9 +1,10 @@
 import { useFormik } from "formik";
 import moment from "moment";
-import { FC } from "react";
-import { BaseInput } from "../base-input";
-import { Button } from "../button/button";
-import styles from "./add-form.module.scss";
+import { FC, ReactNode } from "react";
+
+import { BaseInput } from "../../base-input";
+import { Button } from "../../button/button";
+import styles from "./task-form.module.scss";
 
 export type Task = {
   title: string;
@@ -19,16 +20,22 @@ export type TaskError = {
 };
 
 interface AddFormProps {
+  closeIcon?: ReactNode;
+  initialValues?: Task;
   handleSubmit: (data: Task) => void;
 }
 
-export const AddForm: FC<AddFormProps> = ({ handleSubmit }) => {
+export const TaskForm: FC<AddFormProps> = ({
+  closeIcon,
+  initialValues,
+  handleSubmit,
+}) => {
   const formik = useFormik({
     initialValues: {
-      title: "",
-      description: "",
-      start_time: "",
-      end_time: "",
+      title: initialValues?.title ?? "",
+      description: initialValues?.description ?? "",
+      start_time: initialValues?.start_time ?? "",
+      end_time: initialValues?.end_time ?? "",
     },
     validate: (values) => {
       const errors: TaskError = {};
@@ -57,7 +64,6 @@ export const AddForm: FC<AddFormProps> = ({ handleSubmit }) => {
         end_time: moment(end).format("DD-MM-YYYY"),
       });
       setSubmitting(false);
-
       resetForm();
     },
   });
@@ -65,6 +71,7 @@ export const AddForm: FC<AddFormProps> = ({ handleSubmit }) => {
   return (
     <div className={styles.container}>
       <form onSubmit={formik.handleSubmit} className={styles.form}>
+        {closeIcon}
         <BaseInput
           name="title"
           value={formik.values.title}

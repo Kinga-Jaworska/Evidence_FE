@@ -3,3 +3,10 @@
   border: 0;
   cursor: pointer;
 }
+
+@mixin transparentButton {
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+}

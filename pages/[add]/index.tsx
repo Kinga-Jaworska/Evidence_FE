@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import type { NextPage } from "next";
 import toast from "react-simple-toasts";
-import { AddForm, Task } from "../../src/components/forms";
+import { Task, TaskForm } from "../../src/components/forms/task-form";
 
 const AddPage: NextPage = () => {
-  const mutation = useMutation({
+  const addMutation = useMutation({
     mutationFn: async (data: Task) => {
       return await fetch("http://localhost:3000/api/v1/tasks", {
         method: "POST",
@@ -21,11 +21,10 @@ const AddPage: NextPage = () => {
   });
 
   const onSubmit = (data: Task) => {
-    console.log(data);
-    mutation.mutate(data);
+    addMutation.mutate(data);
   };
 
-  return <AddForm handleSubmit={onSubmit} />;
+  return <TaskForm handleSubmit={onSubmit} />;
 };
 
 export default AddPage;

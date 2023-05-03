@@ -1,0 +1,18 @@
+@use "styles/mixins.scss";
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.closeButton {
+  @include mixins.transparentButton;
+  width: fit-content;
+}

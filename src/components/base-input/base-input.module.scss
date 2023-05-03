@@ -19,6 +19,7 @@
 .input:focus {
   outline: none;
 }
+
 .input::placeholder {
   color: variables.$color-white;
 }
