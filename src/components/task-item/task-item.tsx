@@ -3,8 +3,9 @@ import Edit from "assets/edit.svg";
 import Image from "next/image";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import moment from "moment";
+import { ReadTask } from "../../services";
 import { Button } from "../button/button";
-import { ReadTask } from "../home-page-content/home-page-content";
 import styles from "./task-item.module.scss";
 
 export type TaskItemProps = {
@@ -39,7 +40,15 @@ export const TaskItem = ({ task, openEditForm }: TaskItemProps) => {
 
   return (
     <div className={styles.container} key={task.id}>
-      <p className={styles.title}>{task.start_time}</p>
+      <div className={styles.times}>
+        <p className={styles.date}>
+          {moment(task.start_time).format("DD-MM-YYYY")}
+        </p>
+        <p className={styles.title}>
+          {moment(task.start_time).format("hh:mm a")}
+        </p>
+      </div>
+
       <div className={styles.section}>
         <p className={styles.duration}>{ChangeDurationFormat(task.duration)}</p>
         <Button className={styles.button} onClick={() => openEditForm(task)}>

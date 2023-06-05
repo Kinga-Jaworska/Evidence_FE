@@ -1,8 +1,10 @@
 import FileSaver from "file-saver";
 import toast from "react-simple-toasts";
+import useAuth from "./use-auth";
 
 export const useDownload = () => {
-  const currentUser = 2; // TODO: after add auth flow
+  const currentUser = 1; // TODO: after add auth flow
+  const { headers } = useAuth();
   const downloadFile = async () => {
     try {
       const response = await fetch(
@@ -10,7 +12,8 @@ export const useDownload = () => {
         {
           method: "GET",
           headers: {
-            "Content-Type": "application/octet-stream",
+            ...headers,
+            "Content-Type": "text/csv",
           },
         }
       );
@@ -20,7 +23,7 @@ export const useDownload = () => {
       }
 
       const blob = await response.blob();
-      FileSaver.saveAs(blob, `${currentUser}-evidence`);
+      FileSaver.saveAs(blob, `${currentUser}-evidence.csv`);
     } catch (error) {
       toast("Error", { position: "center" });
       console.error("Error:", error);

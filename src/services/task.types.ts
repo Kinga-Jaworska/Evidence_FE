@@ -1,8 +1,8 @@
 export type Task = {
   title: string;
   description?: string;
-  start_time: string;
-  end_time: string;
+  start_time: Date;
+  end_time: Date;
   duration: number;
 };
 
@@ -16,14 +16,19 @@ export type GroupedTask = {
 };
 
 export type AddTimeSlot = {
-  start_time: string;
-  end_time: string;
+  start_time: Date;
+  end_time: Date;
   duration: number;
 };
 
 export type TimeSlot = AddTimeSlot & {
-  start_time: string;
-  end_time: string;
+  start_time: Date;
+  end_time: Date;
   duration: number;
   task: Task;
+};
+
+export type TaskError = {
+  title?: string;
+  start_time?: string;
 };

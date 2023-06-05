@@ -1,8 +1,13 @@
 import type { NextPage } from "next";
-import { HomePageContent } from "../src/components/home-page-content/home-page-content";
+import LoginPage from "./auth/login";
 
 const Home: NextPage = () => {
-  return <HomePageContent />;
+  // console.log("TOKEN", isAuthenticated);
+  // const router = useRouter();
+  // const { token } = useAuth();
+
+  // return token ? <Start /> : <LoginPage />;
+  return <LoginPage />;
 };
 
 export default Home;

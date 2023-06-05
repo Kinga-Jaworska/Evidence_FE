@@ -1,23 +1,19 @@
 import { useFormik } from "formik";
-import moment from "moment";
 import { FC, ReactNode } from "react";
 
-import { Task } from "../../../services";
-import { BaseInput } from "../../base-input";
+import moment from "moment";
+import { Task, TaskError } from "../../../services";
+import { setDuration, setEndTime } from "../../../utils/task-utils";
 import { Button } from "../../button/button";
+import { BaseInput } from "../../inputs/base-input";
+import { DatetimeInput } from "../../inputs/datetime-input/datetime-input";
 import styles from "./task-form.module.scss";
-
-export type TaskError = {
-  title?: string;
-  start_time?: string;
-};
 
 interface AddFormProps {
   closeIcon?: ReactNode;
   initialValues?: Task;
   handleSubmit: (data: Task) => void;
 }
-
 export const TaskForm: FC<AddFormProps> = ({
   closeIcon,
   initialValues,
@@ -27,11 +23,16 @@ export const TaskForm: FC<AddFormProps> = ({
     initialValues: {
       title: initialValues?.title ?? "",
       description: initialValues?.description ?? "",
-      start_time: initialValues?.start_time ?? "",
-      end_time: initialValues?.end_time ?? "",
+      start_time: moment(initialValues?.start_time).toDate(),
+      end_time:
+        setEndTime(
+          initialValues?.start_time || new Date(),
+          initialValues?.duration || 0
+        ) ?? new Date(),
     },
     validate: (values) => {
       const errors: TaskError = {};
+
       if (!values.title) {
         errors.title = "Title is required";
       }
@@ -41,20 +42,14 @@ export const TaskForm: FC<AddFormProps> = ({
       if (values.start_time > values.end_time) {
         errors.start_time = "Start time have to be before end time";
       }
+
       return errors;
     },
     onSubmit: async (values, { setSubmitting, resetForm }) => {
-      const start = new Date(values.start_time);
-      const end = new Date(values.end_time);
-
-      const timeDiffInMs = Math.floor(end.getTime() - start.getTime());
-      const duration = Math.floor((timeDiffInMs / 3600) * 60) / 1000;
-
       handleSubmit({
         ...values,
-        duration,
-        start_time: moment(start).format("DD-MM-YYYY"),
-        end_time: moment(end).format("DD-MM-YYYY"),
+        duration: setDuration(values.start_time, values.end_time),
+        start_time: new Date(values.start_time),
       });
       setSubmitting(false);
       resetForm();
@@ -78,20 +73,18 @@ export const TaskForm: FC<AddFormProps> = ({
           label="Description"
           onChange={formik.handleChange}
         />
-        <BaseInput
-          name="start_time"
-          type="datetime-local"
-          value={formik.values.start_time}
-          label="Start Time"
-          onChange={formik.handleChange}
+        <DatetimeInput
+          time={formik.values.start_time}
           error={formik.errors.start_time}
+          handleChange={(value) =>
+            formik.setFieldValue("start_time", new Date(value.toString()))
+          }
         />
-        <BaseInput
-          name="end_time"
-          type="datetime-local"
-          value={formik.values.end_time}
-          label="End Time"
-          onChange={formik.handleChange}
+        <DatetimeInput
+          time={formik.values.end_time}
+          handleChange={(value) =>
+            formik.setFieldValue("end_time", new Date(value.toString()))
+          }
         />
         <Button type="submit" disabled={formik.isSubmitting}>
           Ok

@@ -9,8 +9,17 @@
   gap: 30px;
 }
 
+.times {
+  display: flex;
+  gap: 20px;
+}
+
 .title {
   padding: 0;
+}
+
+.date {
+  font-weight: bolder;
 }
 
 .duration {

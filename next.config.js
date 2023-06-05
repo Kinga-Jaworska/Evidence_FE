@@ -7,4 +7,12 @@ module.exports = {
   },
   reactStrictMode: true,
   swcMinify: true,
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/google/redirect",
+  //       destination: "/api/google",
+  //     },
+  //   ];
+  // },
 };

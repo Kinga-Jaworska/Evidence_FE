@@ -1,9 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Close from "assets/close-circle.svg";
 import Image from "next/image";
+import useAuth from "../../hooks/use-auth";
 import { AddTimeSlot, ReadTask, TimeSlot } from "../../services";
 import { Button } from "../button/button";
-import { AddTimeSlotForm } from "../forms/add-time-slot";
+import { AddTimeSlotForm } from "../forms/time-slot";
 import { CustomModal } from "../modal/modal";
 import styles from "./add-slot.module.scss";
 
@@ -14,6 +15,8 @@ export type AddSlotProps = {
 };
 
 export const AddSlot = ({ task, open, onClose }: AddSlotProps) => {
+  const { headers } = useAuth();
+
   const queryClient = useQueryClient();
   const addTimeSlotMutation = useMutation({
     mutationFn: async (data: TimeSlot) => {
@@ -21,7 +24,8 @@ export const AddSlot = ({ task, open, onClose }: AddSlotProps) => {
       return await fetch(`http://localhost:3000/api/v1/time_slots`, {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
+          // "Content-Type": "application/json",
+          ...headers,
         },
         body: JSON.stringify({ ...data, task_id: task.id }),
       });
