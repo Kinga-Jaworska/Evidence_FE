@@ -2,8 +2,8 @@ import Delete from "assets/delete.svg";
 import Edit from "assets/edit.svg";
 import Image from "next/image";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import moment from "moment";
+import { useDeleteTask } from "../../hooks/queries/use-delete-task";
 import { ReadTask } from "../../services";
 import { Button } from "../button/button";
 import styles from "./task-item.module.scss";
@@ -14,29 +14,13 @@ export type TaskItemProps = {
 };
 
 export const TaskItem = ({ task, openEditForm }: TaskItemProps) => {
-  const queryClient = useQueryClient();
+  const { deleteMutation } = useDeleteTask();
+
   const ChangeDurationFormat = (duration: number) => {
     if (duration >= 60)
       return `${Math.floor(duration / 60)}h ${duration % 60} min`;
     else return `${duration % 60} min`;
   };
-
-  const deleteMutation = useMutation({
-    mutationFn: async (id: number) => {
-      return await fetch(`http://localhost:3000/api/v1/time_slots/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    },
-    onError: (error: any) => {
-      console.log(error);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["tasks"]);
-    },
-  });
 
   return (
     <div className={styles.container} key={task.id}>

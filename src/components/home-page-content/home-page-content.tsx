@@ -11,7 +11,7 @@ import { useTasks } from "../../hooks/queries/use-tasks";
 import { TaskContainer } from "../task-container/task-container";
 import styles from "./home-page-content.module.scss";
 
-export const HomePageContent = () => {
+export const StartPageContent = () => {
   const router = useRouter();
   const { downloadFile } = useDownload();
   const { open, closeModal, openModal } = useModal();
@@ -23,7 +23,6 @@ export const HomePageContent = () => {
   } = useModal();
   const { taskEdit: addSlot, handleOpenForm: handleOpenSlotForm } =
     useOpenForm<ReadTask>({ openModal: openSlotFormModal });
-
   const { isLoading, data, error } = useTasks();
 
   if (isLoading) return <p>Loading...</p>;

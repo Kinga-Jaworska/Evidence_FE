@@ -1,6 +1,6 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Close from "assets/close-circle.svg";
 import Image from "next/image";
+import { useEditTask } from "../../hooks/queries/use-edit-task";
 import { ReadTask, Task } from "../../services";
 import { Button } from "../button/button";
 import { TaskForm } from "../forms/task-form";
@@ -14,25 +14,7 @@ export type EditProps = {
 };
 
 export const Edit = ({ task, open, onClose }: EditProps) => {
-  const queryClient = useQueryClient();
-  const editMutation = useMutation({
-    mutationFn: async (data: Task) => {
-      return await fetch(`http://localhost:3000/api/v1/tasks/${task.slot_id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...data, user_id: 2 }),
-      });
-    },
-    onError: (error: any) => {
-      console.log(error);
-    },
-    onSuccess: () => {
-      onClose();
-      queryClient.invalidateQueries(["tasks"]);
-    },
-  });
+  const { editMutation } = useEditTask({ onClose, task });
 
   const handleEdit = (task: Task) => {
     editMutation.mutate(task);

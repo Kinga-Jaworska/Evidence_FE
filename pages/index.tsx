@@ -1,13 +1,31 @@
 import type { NextPage } from "next";
-import LoginPage from "./auth/login";
+import { useRouter } from "next/router";
+import LoginPage from "../src/components/auth/login-screen";
+import Profile from "../src/components/profile";
+import { useStore } from "../src/hooks";
 
 const Home: NextPage = () => {
-  // console.log("TOKEN", isAuthenticated);
-  // const router = useRouter();
-  // const { token } = useAuth();
+  const { accessToken } = useStore();
+  const router = useRouter();
 
-  // return token ? <Start /> : <LoginPage />;
-  return <LoginPage />;
+  // useEffect(() => {
+  //   // const storedAccessToken = localStorage.getItem("accessToken");
+  //   if (accessToken) {
+  //     // Perform any additional actions with the retrieved accessToken
+  //     // e.g., redirect to the desired page
+  //     router.push("/start");
+  //   } else router.push("/");
+  // }, [accessToken]);
+
+  // const { accessToken } = useStore();
+  // const [isAuth, setIsAuth] = useState(!!accessToken);
+
+  // useEffect(() => {
+  //   console.log("TOKEN");
+  //   if (accessToken) setIsAuth(true);
+  // }, [accessToken]);
+
+  return accessToken ? <Profile /> : <LoginPage />;
 };
 
 export default Home;

@@ -1,19 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { GroupedTask } from "../../services";
-import useAuth from "../use-auth";
+import { useHeaders } from "../use-header";
 
 export function useTasks() {
-  const { token } = useAuth();
-
-  const headers = {
-    Authorization: `Bearer ${token}`,
-    "Content-Type": "application/json",
-  };
+  const { headers, currentUserID } = useHeaders();
 
   const fetchGroups = (): Promise<GroupedTask> =>
     axios
-      .get("http://localhost:3000/api/v1/tasks/", {
+      .get(`http://localhost:3000/api/v1/tasks/${currentUserID}`, {
         headers: {
           ...headers,
         },
