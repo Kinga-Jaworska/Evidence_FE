@@ -2,8 +2,9 @@ import { useFormik } from "formik";
 import { FC, ReactNode } from "react";
 
 import { AddTimeSlot, TaskError } from "../../../services";
-import { setDuration } from "../../../utils/task-utils";
+import { setDurationInMinutes } from "../../../utils/task-utils";
 import { Button } from "../../button/button";
+import { BaseInput } from "../../inputs/base-input";
 import { DatetimeInput } from "../../inputs/datetime-input/datetime-input";
 import styles from "./time-slot.module.scss";
 
@@ -20,23 +21,26 @@ export const AddTimeSlotForm: FC<AddTimeSlotProps> = ({
   const formik = useFormik({
     initialValues: {
       start_time: new Date(),
-      end_time: new Date(),
+      duration: "1h",
     },
     validate: (values) => {
       const errors: TaskError = {};
+      const regex = /^(\d+w\s?)?(\d+d\s?)?(\d{1,2}h\s?)?(\d{1,2}m)?$/;
+
       if (!values.start_time) {
         errors.start_time = "Required field";
       }
-      if (values.start_time > values.end_time) {
-        errors.start_time = "Start time have to be before end time";
+      if (!regex.test(values.duration)) {
+        errors.duration = "Wrong Format (1w 1d 1h 1m)";
       }
+
       return errors;
     },
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       handleSubmit({
         ...values,
-        duration: setDuration(values.start_time, values.end_time),
         start_time: values.start_time,
+        duration: setDurationInMinutes(values.duration),
       });
       setSubmitting(false);
       resetForm();
@@ -53,11 +57,12 @@ export const AddTimeSlotForm: FC<AddTimeSlotProps> = ({
             formik.setFieldValue("start_time", new Date(value.toString()))
           }
         />
-        <DatetimeInput
-          time={formik.values.end_time}
-          handleChange={(value) =>
-            formik.setFieldValue("end_time", new Date(value.toString()))
-          }
+        <BaseInput
+          name="duration"
+          value={formik.values.duration}
+          label="Duration"
+          onChange={formik.handleChange}
+          error={formik.errors.duration}
         />
         <Button type="submit" disabled={formik.isSubmitting}>
           Add new time slot

@@ -10,7 +10,7 @@ export const useDownload = () => {
   const downloadFile = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/v1/users/${authData.id}`,
+        `http://localhost:3000/api/v1/users/${authData?.id}`,
         {
           method: "GET",
           headers: {
@@ -31,5 +31,20 @@ export const useDownload = () => {
       console.error("Error:", error);
     }
   };
-  return { downloadFile };
+
+  const downloadOverallFile = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/v1/files`, {
+        method: "GET",
+        headers,
+      });
+
+      console.log(JSON.stringify(response.body));
+    } catch (error) {
+      toast("Error", { position: "center" });
+      console.error("Error:", error);
+    }
+  };
+
+  return { downloadFile, downloadOverallFile };
 };

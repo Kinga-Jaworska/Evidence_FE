@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import toast from "react-simple-toasts";
 import { TaskForm } from "../src/components/forms/task-form";
 import { useStore } from "../src/hooks";
@@ -9,6 +10,7 @@ import { Task } from "../src/services";
 const AddPage: NextPage = () => {
   const { authData } = useStore();
   const { headers } = useHeaders();
+  const router = useRouter();
 
   const addMutation = useMutation({
     mutationFn: async (data: Task) => {
@@ -22,7 +24,9 @@ const AddPage: NextPage = () => {
     onError: (error: any) => {
       toast("Error", { position: "top-right" });
     },
-    onSuccess: () => {},
+    onSuccess: () => {
+      router.push("/start");
+    },
   });
 
   const onSubmit = async (data: Task) => {

@@ -5,6 +5,7 @@ import Image from "next/image";
 import moment from "moment";
 import { useDeleteTask } from "../../hooks/queries/use-delete-task";
 import { ReadTask } from "../../services";
+import { changeDurationFormatToString } from "../../utils/task-utils";
 import { Button } from "../button/button";
 import styles from "./task-item.module.scss";
 
@@ -15,12 +16,6 @@ export type TaskItemProps = {
 
 export const TaskItem = ({ task, openEditForm }: TaskItemProps) => {
   const { deleteMutation } = useDeleteTask();
-
-  const ChangeDurationFormat = (duration: number) => {
-    if (duration >= 60)
-      return `${Math.floor(duration / 60)}h ${duration % 60} min`;
-    else return `${duration % 60} min`;
-  };
 
   return (
     <div className={styles.container} key={task.id}>
@@ -34,7 +29,9 @@ export const TaskItem = ({ task, openEditForm }: TaskItemProps) => {
       </div>
 
       <div className={styles.section}>
-        <p className={styles.duration}>{ChangeDurationFormat(task.duration)}</p>
+        <p className={styles.duration}>
+          {changeDurationFormatToString(task.duration)}
+        </p>
         <Button className={styles.button} onClick={() => openEditForm(task)}>
           <Image src={Edit} width={20} height={20} alt="edit-button" />
         </Button>
