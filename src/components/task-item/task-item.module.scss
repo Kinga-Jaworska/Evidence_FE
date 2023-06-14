@@ -1,0 +1,49 @@
+@use "styles/variables.scss";
+@use "styles/mixins.scss";
+
+.container {
+  display: flex;
+  padding: 0 20px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.times {
+  display: flex;
+  gap: 20px;
+}
+
+.title {
+  padding: 0;
+}
+
+.date {
+  font-weight: bolder;
+}
+
+.duration {
+  border-radius: 10px;
+  padding: 10px;
+  background-color: variables.$color-white;
+  box-shadow: variables.$card-box-shadow;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: row;
+}
+
+.button {
+  background-color: variables.$color-primary;
+  height: fit-content;
+}
+
+.closeButton {
+  @include mixins.transparentButton;
+  width: fit-content;
+  align-self: flex-end;
+}

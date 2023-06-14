@@ -1,0 +1,15 @@
+@use "styles/variables.scss";
+
+.dateTime {
+  input {
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: variables.$color-accent;
+    color: variables.$color-secondary;
+  }
+}
