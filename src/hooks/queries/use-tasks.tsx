@@ -8,7 +8,7 @@ export function useTasks() {
 
   const fetchGroups = (): Promise<GroupedTask> =>
     axios
-      .get(`http://localhost:3000/api/v1/tasks/${currentUserID}`, {
+      .get(`${process.env.BE_URL}/tasks/${currentUserID}`, {
         headers: {
           ...headers,
         },

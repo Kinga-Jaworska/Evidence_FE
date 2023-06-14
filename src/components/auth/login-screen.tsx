@@ -18,6 +18,7 @@ function LoginScreen() {
                 token: credentialResponse.credential,
               });
 
+              // TODO: change to cookies storage
               const data = response.data;
               localStorage.setItem("authData", JSON.stringify(data));
               localStorage.setItem(
@@ -31,6 +32,7 @@ function LoginScreen() {
               router.push("/start");
             }}
             onError={() => {
+              // TODO: handling error - UI
               console.log("Login Failed");
             }}
           />

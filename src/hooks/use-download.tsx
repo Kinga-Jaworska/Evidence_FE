@@ -10,7 +10,7 @@ export const useDownload = () => {
   const downloadFile = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/v1/users/${authData?.id}`,
+        `${process.env.BE_URL}/users/${authData?.id}`,
         {
           method: "GET",
           headers: {
@@ -34,12 +34,14 @@ export const useDownload = () => {
 
   const downloadOverallFile = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/v1/files`, {
+      await fetch(`${process.env.BE_URL}/files`, {
         method: "GET",
         headers,
       });
 
-      console.log(JSON.stringify(response.body));
+      toast("Successfully saved report on company google drive", {
+        position: "center",
+      });
     } catch (error) {
       toast("Error", { position: "center" });
       console.error("Error:", error);

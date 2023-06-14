@@ -20,7 +20,7 @@ export const AddSlot = ({ task, open, onClose }: AddSlotProps) => {
   const queryClient = useQueryClient();
   const addTimeSlotMutation = useMutation({
     mutationFn: async (data: TimeSlot) => {
-      return await fetch(`http://localhost:3000/api/v1/time_slots`, {
+      return await fetch(`${process.env.BE_URL}time_slots`, {
         method: "PUT",
         headers,
         body: JSON.stringify({ ...data, task_id: task.id }),

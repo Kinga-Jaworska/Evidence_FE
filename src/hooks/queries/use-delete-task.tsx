@@ -5,9 +5,11 @@ export function useDeleteTask() {
   const { headers } = useHeaders();
   const queryClient = useQueryClient();
 
+  // TODO: change fetch to axios
+
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
-      return await fetch(`http://localhost:3000/api/v1/time_slots/${id}`, {
+      return await fetch(`${process.env.BE_URL}/time_slots/${id}`, {
         method: "DELETE",
         headers,
       });

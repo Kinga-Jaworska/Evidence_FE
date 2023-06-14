@@ -15,7 +15,7 @@ export function useEditTask({ onClose, task }: UseEditTaskProps) {
 
   const editMutation = useMutation({
     mutationFn: async (data: Task) => {
-      return await fetch(`http://localhost:3000/api/v1/tasks/${task.slot_id}`, {
+      return await fetch(`${process.env.BE_URL}/tasks/${task.slot_id}`, {
         method: "PUT",
         headers,
         body: JSON.stringify({

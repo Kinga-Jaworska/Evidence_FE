@@ -13,7 +13,6 @@ function MyApp({ Component, pageProps, ...rest }: AppProps) {
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        {/* <Navigation /> */}
         <Component {...pageProps} />
       </QueryClientProvider>
     </Provider>
