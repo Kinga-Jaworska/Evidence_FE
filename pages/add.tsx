@@ -11,10 +11,11 @@ const AddPage: NextPage = () => {
   const { authData } = useStore();
   const { headers } = useHeaders();
   const router = useRouter();
+  // TODO: handling errors
 
   const addMutation = useMutation({
     mutationFn: async (data: Task) => {
-      return await fetch("http://localhost:3000/api/v1/tasks", {
+      return await fetch(`${process.env.BE_URL}/tasks`, {
         method: "POST",
         headers,
         body: JSON.stringify({ ...data, user_id: authData.id }),
