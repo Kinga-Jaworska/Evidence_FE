@@ -13,3 +13,8 @@ FE part of evidence application allows to:
 > npm i
 
 > npm run dev
+
+
+### Prototype v1 start page:
+
+<img width="1180" alt="image" src="https://github.com/Kinga-Jaworska/Evidence_FE/assets/67658221/b4de479f-ab61-4d38-862f-61707ae4359f">
