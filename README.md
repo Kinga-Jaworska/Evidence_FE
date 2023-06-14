@@ -1,4 +1,4 @@
-# Evidence App - BE
+# Evidence App - FE
 
 Project still in progress... 👀
 FE part of evidence application allows to:
