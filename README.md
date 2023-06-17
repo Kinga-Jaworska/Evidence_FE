@@ -9,10 +9,13 @@ FE part of evidence application allows to:
 * ATM saving csv file with overall company report on google drive (in future only for manager role)
 
 ### To run project: 
+It you want to works this with server you need run app https://github.com/Kinga-Jaworska/Evidence_BE
 
 > npm i
 
 > npm run dev
+
+
 
 
 ### Prototype v1 start page:
